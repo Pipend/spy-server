@@ -6,7 +6,8 @@
   "scripts": {
     "test": "mocha test/index.ls --compilers ls:livescript",
     "coverage": "istanbul cover _mocha -- test/index.ls --compilers ls:livescript",
-    "coveralls": "istanbul cover _mocha -- test/index.ls --compilers ls:livescript  && cat coverage/lcov.info | coveralls"
+    "coveralls": "istanbul cover _mocha -- test/index.ls --compilers ls:livescript  && cat coverage/lcov.info | coveralls",
+    "configure": "cp config.sample.ls config.ls"
   },
   "author": "Furqan Zafar",
   "license": "ISC",

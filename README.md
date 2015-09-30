@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/Pipend/spy-server.svg?branch=master)](https://travis-ci.org/Pipend/spy-server)    [![Coverage Status](https://coveralls.io/repos/Pipend/spy-server/badge.svg?branch=master&service=github)](https://coveralls.io/github/Pipend/spy-server?branch=master)
+
 # Install
 `git clone git@github.com:Pipend/spy-server.git`
 
@@ -5,31 +7,7 @@
 
 * `npm install`
 
-* copy the following to `config.ls`
-```
-require! \./rextend
-
-default-mongo-storage-details = 
-    name: \mongo    
-    connection-options: 
-        auto_reconnect: true
-        db:
-          w:1
-        server:
-          socket-options:
-              keepAlive: 1
-    insert-into: 
-        collection: \events  
-
-module.exports = 
-
-    http-port: 3010
-    log-events: false
-
-    projects:
-        test: [{} <<< default-mongo-storage-details <<< {connection-string: \mongodb://localhost:27017/test}]
-
-```
+* `npm run configure` - this creates `config.ls` in the project directory (update it with your list of projects and the corresponding storage details)
 
 * `lsc server.ls`
 
