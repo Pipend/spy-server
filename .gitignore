@@ -1,0 +1,8 @@
+.DS_Store
+config.ls
+coverage/
+node_modules/
+npm-debug.log
+*.js
+*.css
+*.sublime-workspace
