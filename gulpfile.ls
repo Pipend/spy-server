@@ -2,7 +2,7 @@ require! \gulp
 require! \gulp-exit
 require! \gulp-livescript
 require! \gulp-mocha
-{instrument, hook-require, write-reports} = (require \gulp-live-istanbul)!
+{instrument, hook-require, write-reports} = (require \gulp-livescript-istanbul)!
 require! \gulp-nodemon
 require! \livescript
 
