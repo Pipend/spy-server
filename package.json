@@ -28,6 +28,7 @@
   "devDependencies": {
     "coveralls": "^2.11.4",
     "gulp": "^3.9.0",
+    "gulp-exit": "0.0.2",
     "gulp-livescript": "^2.4.0",
     "gulp-livescript-istanbul": "0.0.1",
     "gulp-mocha": "^2.1.3",
