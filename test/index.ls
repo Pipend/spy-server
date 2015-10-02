@@ -2,7 +2,7 @@ require! \assert
 {promises:{bindP, from-error-value-callback, new-promise, sequenceP, to-callback}} = require \async-ls
 {projects} = require \../config
 {MongoClient} = require \mongodb
-{each, find, map} = require \prelude-ls
+{each, find, keys, map} = require \prelude-ls
 require! \../routes 
 
 describe "routes", ->
@@ -28,6 +28,32 @@ describe "routes", ->
             assert !!req.body, "req.body must be defined and a JSON object"
             assert req.body.event-type == \test, "req.body.event-type must be test instead of #{req?.body?.event-type}"
             done!
+
+    specify "must throw an error if project is not configured", (done) ->
+        [,,,handler] = find (.0 == \record-event), routes
+
+        # req mockup
+        req =
+            body: event-type: \test
+            get: -> \localhost
+            headers:
+                user-argent: \test
+            original-url: '/?foo=bar'
+            params: 
+                project: \undefined
+            protocol: \http
+            socket:
+                remote-address: \127.0.0.1
+
+        # res mockup
+        res = 
+            status: (code) -> 
+                assert.equal code, 500
+                @
+            end: -> done!
+
+        handler req, res
+
 
     specify "POSTing event object to /:project must insert it into configured database", (done) ->
         assert !!projects.test, "please specify storage details for 'test' project in config.ls"

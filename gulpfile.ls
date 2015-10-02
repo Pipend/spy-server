@@ -1,14 +1,10 @@
 require! \gulp
+require! \gulp-exit
 require! \gulp-livescript
+require! \gulp-mocha
+{instrument, hook-require, write-reports} = (require \gulp-live-istanbul)!
 require! \gulp-nodemon
- 
-gulp.task \build, ->
-    gulp.src <[routes.ls]>
-    .pipe gulp-livescript!
-    .pipe gulp.dest './'
-
-gulp.task \watch, ->
-    gulp.watch <[./routes.ls]>, <[build]>
+require! \livescript
 
 gulp.task \server, ->
     gulp-nodemon do
@@ -17,4 +13,14 @@ gulp.task \server, ->
         ignore: <[.gitignore gulpfile.ls notes spy-server.sublime-project README.md rough public/*]>
         script: \./server.ls
     
-gulp.task \default, <[build watch server]>
+gulp.task \coverage, ->
+    gulp.src <[routes.ls]>
+    .pipe instrument!
+    .pipe hook-require!
+
+    gulp.src <[./test/index.ls]>
+    .pipe gulp-mocha!
+    .pipe write-reports!
+    .on \finish, -> process.exit!
+
+gulp.task \default, <[server]>
