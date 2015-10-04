@@ -19,7 +19,7 @@
     "cors": "^2.5.3",
     "express": "^4.12.3",
     "mongodb": "^2.0.39",
-    "pipend-spy": "0.0.2",
+    "pipend-spy": "0.0.3",
     "prelude-extension": "0.0.6",
     "prelude-ls": "^1.1.1",
     "request": "^2.55.0",
