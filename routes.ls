@@ -1,5 +1,6 @@
 {promises:{to-callback}} = require \async-ls
-{projects}:config = require \./config
+require! \cli-color
+{log-events, projects}:config = require \./config
 require! \pipend-spy
 
 # :: a -> [ExpressRoute]
@@ -41,6 +42,11 @@ module.exports = do ->
 
             else
                 
+                if !!log-events
+                    console.log cli-color.green-bright "#{project} : #{new Date!}"
+                    console.log JSON.stringify req.body, null, 4
+                    console.log ""
+
                 # TODO: update to-callback function to avoid consumption of exceptions
                 err, result <- to-callback ((pipend-spy projects[req.params.project]).record-req req, req.body)
 
