@@ -15,9 +15,8 @@ if cluster.is-master
     cpus = (require \os).cpus!.length
     [0 til cpus] |> each (i) -> spawn i
     
-    # create proxy server for express
     server = net.create-server {pause-on-connect: true}, (connection) ->
-        workers[(Number connection.remote-address.replace /\./g, "") % cpus].send \connection, connection
+        workers[(ip.to-long connection.remote-address) % config.workers].send \connection, connection
     server.listen http-port
     console.log "port #{http-port} opened by express"
 
