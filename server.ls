@@ -1,6 +1,7 @@
 require! \cluster
 {http-port}:config = require \./config
 require! \net
+require! \ip
 {each} = require \prelude-ls
 
 if cluster.is-master
