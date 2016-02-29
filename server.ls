@@ -17,7 +17,7 @@ if cluster.is-master
     [0 til cpus] |> each (i) -> spawn i
     
     server = net.create-server {pause-on-connect: true}, (connection) ->
-        workers[(ip.to-long connection.remote-address) % config.workers].send \connection, connection
+        workers[(ip.to-long connection.remote-address) % workers.length].send \connection, connection
     server.listen http-port
     console.log "port #{http-port} opened by express"
 
